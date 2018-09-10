@@ -19,6 +19,7 @@ export class Stops extends React.Component {
             BusRoute:'',
             Lat:'',
             Longtitude:'',
+            id:'',
             GPS_Location_1:'',
             GPS_Location_2:'',
             Poly_Cord_lat1:'',
@@ -159,6 +160,7 @@ export class Stops extends React.Component {
 
     onUpdateStop(){
         const InserData =  {
+            "id": this.state.id,
             "Stops": this.state.Stops,
             "BusRoute": this.state.BusRoute,
             "Lat": this.state.Lat,
@@ -191,7 +193,7 @@ export class Stops extends React.Component {
 
         axios({
             method: 'put',
-            url: `${SERVER_URL}busstops`,
+            url: `${SERVER_URL}busstops/${this.state.id}`,
             data: InserData,
             config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
@@ -337,6 +339,7 @@ export class Stops extends React.Component {
                                 <td><Button bsStyle="success" style={{width:50}} onClick={() => this.setState({
                                     update_show: true,
                                     selectKey:index,
+                                    id:this.state.data[index].id,
                                     BusRoute:this.state.data[index].BusRoute,
                                     Stops:this.state.data[index].Stops,
                                     Lat:this.state.data[index].Lat,
