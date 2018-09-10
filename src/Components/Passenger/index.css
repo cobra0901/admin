@@ -1,0 +1,22 @@
+label{
+    width:180px;
+}
+button{
+    width:220px;
+    height: 40px;
+    margin-top: -6px;
+}
+.input-view{
+    margin: 10px 10%;
+}
+
+MultipleDatePicker{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-weight: 400;
+    height: 214px;
+    line-height: 1.25;
+    position: relative;
+    text-align: center;
+}

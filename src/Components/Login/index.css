@@ -1,0 +1,20 @@
+.menu-img{
+    width: 250px;
+    height: 150px;
+    margin: 0 40px;
+}
+h1{
+    text-align: center;
+}
+.header-text-1{
+   /*// font-family: 'Chango', cursive;*/
+    font-family: 'Bree Serif', serif;
+
+    font-size: 28px;
+
+}
+
+.header-text-2{
+    font-family: 'Baloo Tammudu', cursive;
+    font-size: 50px;
+}

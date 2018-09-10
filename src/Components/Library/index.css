@@ -1,0 +1,31 @@
+label{
+    width:180px;
+}
+button{
+    width:80px;
+    height: 30px;
+    margin-top: -6px;
+}
+.input-view1{
+    margin: 10px 2%;
+}
+
+.table th{
+    height: 35px;
+    font-size: 13px;
+    max-width:30px;
+    max-height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    overflow-y: auto;
+    white-space: pre-wrap!important;
+    word-wrap:break-word!important
+}
+.table td{
+    font-size: 12px;
+    text-align: center;
+    //vertical-align: middle;
+    overflow-y: auto;
+    white-space: pre-wrap!important;
+    word-wrap:break-word!important
+}

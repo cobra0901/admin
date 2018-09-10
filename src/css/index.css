@@ -1,0 +1,101 @@
+/* Main rules */
+
+html {
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  margin: 0;
+  padding-bottom: 30px;
+  background-color: #fff;
+  color: #000;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.table-view{
+  margin-top: 30px;
+}
+
+.th-view{
+  background-color: cornflowerblue;
+}
+
+.th-button-view{
+  width: 30px;
+}
+
+@media(min-width: 1060px) {
+  .container {
+    width: 960px;
+    margin: 0 auto;
+  }
+}
+
+.imgResponsive {
+  width: 100%;
+  height: auto;
+}
+
+
+/* Typography */
+
+h1 {
+  font-weight: 800;
+  transition: all 0.35s ease-out;
+}
+
+h2 {
+  font-weight: 800;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+  transition: all 0.35s ease-out;
+}
+
+
+/* Nav */
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+ul a {
+  font-weight: 600;
+}
+
+a h1:hover, ul a:hover {
+  color: #1DE9B6;
+}
+
+.inline-align li {
+}
+
+@media(min-width: 768px) {
+  .inline-align {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 38%;
+
+  }
+  .inline-align li {
+    margin: 0 10px;
+  }
+}

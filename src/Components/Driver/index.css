@@ -1,0 +1,11 @@
+label{
+    width:180px;
+}
+button{
+    width:80px;
+    height: 30px;
+    margin-top: -6px;
+}
+.input-view{
+    margin: 10px 10%;
+}
