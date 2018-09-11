@@ -7,6 +7,7 @@ import './style.css';
 
 import {CSVLink} from 'react-csv';
 import {Table,Button} from 'react-bootstrap';
+
 export class RideDetails extends React.Component {
 
     constructor(props, context) {
@@ -28,11 +29,11 @@ export class RideDetails extends React.Component {
         const { selectedDays } = this.state;
         if (selected) {
             const selectedIndex = selectedDays.findIndex(selectedDay =>
-                DateUtils.isSameDay(selectedDay, day.toLocaleDateString())
+                DateUtils.isSameDay(selectedDay, day)
             );
             selectedDays.splice(selectedIndex, 1);
         } else {
-            selectedDays.push(day.toLocaleDateString());
+            selectedDays.push(day);
         }
         this.setState({ selectedDays });
     }
@@ -50,6 +51,7 @@ export class RideDetails extends React.Component {
         nextState[e.target.name] = e.target.value;
         this.setState(nextState);
     }
+
 
     render() {
         return (
@@ -73,7 +75,10 @@ export class RideDetails extends React.Component {
                     </thead>
                     <tbody>
                     {this.props.ridehistories.map((element, index) => {
+                        const i = this.props.ridehistories[index].Travel_Date;
+                         //console.log(i.toLocaleDateString());
                         return(
+
                             <tr key={index}>
                                 <td>{this.props.ridehistories[index].CardID}</td>
                                 <td>{this.props.ridehistories[index].BusRoute}</td>
@@ -81,13 +86,12 @@ export class RideDetails extends React.Component {
                                 <td>{this.props.ridehistories[index].Entry}</td>
                                 <td>{this.props.ridehistories[index].Exit}</td>
                                 <td>{this.props.ridehistories[index].FareCharged}</td>
-                                <td>{this.props.ridehistories[index].Travel_Date}</td>
+                                <td>{i}</td>
                                 <td>{this.props.ridehistories[index].Entry_Time}</td>
                                 <td>{this.props.ridehistories[index].Exit_Time}</td>
                                 <td>{this.props.ridehistories[index].Entry_CardReaderID}</td>
                                 <td>{this.props.ridehistories[index].Exit_CardReaderID}</td>
                                 <td>{this.props.ridehistories[index].Fare_Type}</td>
-
                             </tr>
                         )})}
                     </tbody>
@@ -129,6 +133,7 @@ export class RideDetails extends React.Component {
 
                     <label style={{width:250}}>Select Dates(1 or more):</label>
                     <input style={{width:600,textAlign:'center'}} type="text" placeholder="07-Sep-17,07-Mar-18,01-Jul-18,27-Sep-18" name="SelectDate" value={this.state.selectedDays} onChange={this.handleChange.bind(this)} disabled/>
+
 
                     <DayPicker
                         selectedDays={this.state.selectedDays}
