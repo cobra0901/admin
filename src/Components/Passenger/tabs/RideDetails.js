@@ -1,5 +1,9 @@
 import React from 'react';
 import '../../../css/index.css'
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import 'react-day-picker/lib/style.css';
+import DayPicker, { DateUtils } from 'react-day-picker';
+import './style.css';
 
 import {CSVLink} from 'react-csv';
 import {Table,Button} from 'react-bootstrap';
@@ -9,16 +13,33 @@ export class RideDetails extends React.Component {
         super(props, context);
 
         this.handleHide = this.handleHide.bind(this);
+        this.handleDayClick = this.handleDayClick.bind(this);
 
         this.state = {
             show: false,
             startDate:'',
             EndDate:'',
             date_show:true,
+            selectedDays: []
         };
-
     }
 
+    handleDayClick(day, { selected }) {
+        const { selectedDays } = this.state;
+        if (selected) {
+            const selectedIndex = selectedDays.findIndex(selectedDay =>
+                DateUtils.isSameDay(selectedDay, day.toLocaleDateString())
+            );
+            selectedDays.splice(selectedIndex, 1);
+        } else {
+            selectedDays.push(day.toLocaleDateString());
+        }
+        this.setState({ selectedDays });
+    }
+
+    stylechange(){
+            this.setState({date_show:!this.state.date_show})
+    }
 
     handleHide() {
         this.setState({ show: false });
@@ -68,14 +89,54 @@ export class RideDetails extends React.Component {
                                 <td>{this.props.ridehistories[index].Fare_Type}</td>
 
                             </tr>
-                                )})}
+                        )})}
                     </tbody>
                 </Table>
 
                 <Button bsStyle="info" onClick={() => this.setState({
-                  new_show: true})}><CSVLink style={{color:'#fff'}} data={this.props.ridehistories} >export</CSVLink>
+                    new_show: true})}><CSVLink style={{color:'#fff'}} data={this.props.ridehistories} >export</CSVLink>
                 </Button>
 
+                <Button style={{width:100,marginLeft:10}} bsStyle="info" onClick={this.stylechange.bind(this)}>Select date
+                </Button>
+
+                <br/><br/>
+
+                <div hidden={this.state.date_show}>
+                    <label style={{width:250}}>Start Date:</label>
+                    {/*<input style={{textAlign:'center'}} type="text" placeholder="07-Sep-18" name="startDate" value={this.state.startDate} onChange={this.handleChange.bind(this)} /><br/>*/}
+                    <DayPickerInput
+                        style={{textAlign:'center'}}
+                        dayPickerProps={{
+                            month: new Date(2018, 10),
+                            showWeekNumbers: true,
+                            todayButton: 'Today',
+                        }}
+                    /><br/>
+                    <label style={{width:250,marginTop:10,marginBottom:10}}>&nbsp;&nbsp;&nbsp;</label><span style={{marginLeft:70,marginTop:10,marginBottom:10}}>TO</span><br/>
+                    <label style={{width:250}}>End Date:</label>
+                    {/*<input style={{textAlign:'center'}} type="text" placeholder="07-Sep-18" name="EndDate" value={this.state.EndDate} onChange={this.handleChange.bind(this)} />*/}
+                    <DayPickerInput
+                        style={{textAlign:'center'}}
+                        dayPickerProps={{
+                            month: new Date(2018, 10),
+                            showWeekNumbers: true,
+                            todayButton: 'Today',
+                        }}
+                    />
+                    <br/>
+                    <label style={{width:250,marginTop:10,marginBottom:10}}>&nbsp;&nbsp;&nbsp;</label><span style={{marginTop:10,marginBottom:10}}>OR</span><br/>
+
+                    <label style={{width:250}}>Select Dates(1 or more):</label>
+                    <input style={{width:600,textAlign:'center'}} type="text" placeholder="07-Sep-17,07-Mar-18,01-Jul-18,27-Sep-18" name="SelectDate" value={this.state.selectedDays} onChange={this.handleChange.bind(this)} disabled/>
+
+                    <DayPicker
+                        selectedDays={this.state.selectedDays}
+                        onDayClick={this.handleDayClick}
+                    />
+
+                    <br/>
+                </div>
             </div>
         );
     }
